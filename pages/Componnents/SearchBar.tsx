@@ -13,11 +13,11 @@ interface ISearchBar{
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     SearchBar:{
-        marginTop:40,
+        marginTop:39,
     },
  
     addButton: {
-        marginTop:40,
+        marginTop:39,
         color:"white",
         backgroundColor:"black",
         
