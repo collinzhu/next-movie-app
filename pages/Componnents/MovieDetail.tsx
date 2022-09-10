@@ -1,7 +1,8 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextareaAutosize } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle,TextareaAutosize } from '@material-ui/core';
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+////////////////////////////////////////////////////////////////////////////////////
 interface Input{
     imdbRatings:any;
     descriptions:any;
@@ -16,8 +17,41 @@ interface IMovieDetail{
     Genre: string | undefined;
     descriptions: string | undefined;
 }
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    dialog: {
+      flexGrow: 1,
+      [theme.breakpoints.down('xs')]: {
+        width:290,
+        height:400,
+      },
+    },
 
+    menuButton: {
+      marginRight: theme.spacing(2),
+      color:"white"
+    },
+    title: {
+  
+      [theme.breakpoints.down('xs')]: {
+        
+        fontSize:11
+      },
+     
+    },
+    textArea:{
+        width: 390, 
+        height: 100,
+        [theme.breakpoints.down('xs')]: {
+            width:200,
+            height:200,
+            fontSize:11
+          },
+    }
+  })
+);
 function MovieDetial(props:IMovieDetail) {
+    const classes = useStyles();
     const ok = (props.descriptions)?.toString();
     const [editing, setEditing] = useState(false);
     const [input, setInput] = useState(ok);
@@ -60,27 +94,27 @@ function MovieDetial(props:IMovieDetail) {
 
 
     return (
-        <Dialog maxWidth = 'xs' fullWidth
+        <Dialog className={classes.dialog} 
      open = {true} onClose = {props.handleClose}>
-        <DialogTitle> 
+        <DialogTitle className={classes.title}> 
             <p>{props.Title}</p>
 
             <p>{props.Genre}</p>
             {editing ?
         (<div>
-            <TextareaAutosize
+            <TextareaAutosize className={classes.textArea}
                 required
                 placeholder = "Comments" 
                 value={input}
                 onChange = {e => handleInput(e.target.value)}
-                style={{ width: 390, height: 100}}
+      
                 />
         </div>):(<p>{props.descriptions}</p>) }
 
             
         </DialogTitle>
         <form >
-            <DialogContent style={{height:'250px'}}>
+            <DialogContent style={{height:'30px'}}>
 
                 
             </DialogContent>
